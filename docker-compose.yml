@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+    todo_go:
+        build: .
+        image: go-todo
+        labels:
+            - "traefik.enable=true"
+            - "traefik.backend=todo_go"
+            - "traefik.frontend.rule=Host:go-todo.local"
+            - "traefik.docker.network=web"
+            - "traefik.port=3001"
+        networks:
+            - web
+
+networks:
+    web:
+        external: true
